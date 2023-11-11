@@ -6,7 +6,7 @@
 #    By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/15 15:43:23 by dabdygal          #+#    #+#              #
-#    Updated: 2023/11/07 10:14:24 by dabdygal         ###   ########.fr        #
+#    Updated: 2023/11/11 12:22:18 by dabdygal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ CC = cc
 
 CFLAGS = -Wall -Wextra -Werror -fsanitize=address -I $(INCLUDE_DIR)
 
-SRC_FILES = 
+SRC_FILES = parse_args.c
 
 MAIN_DIR = .
 

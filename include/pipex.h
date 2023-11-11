@@ -1,21 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/07 10:16:03 by dabdygal          #+#    #+#             */
-/*   Updated: 2023/11/11 12:21:19 by dabdygal         ###   ########.fr       */
+/*   Created: 2023/11/11 12:09:38 by dabdygal          #+#    #+#             */
+/*   Updated: 2023/11/11 12:21:32 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <unistd.h>
+#ifndef PIPEX_H
+# define PIPEX_H
+# define PARSE_ERR_MSG "parse error\n"
 
-int	main(int argc, char *argv[])
-{
-	if (argc == 1 || parse_args(argc, argv) < 0)
-		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
-}
+int	parse_args(int argc, char *argv[]);
+
+#endif
