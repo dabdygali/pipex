@@ -6,7 +6,7 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 15:25:39 by dabdygal          #+#    #+#             */
-/*   Updated: 2023/11/12 12:07:04 by dabdygal         ###   ########.fr       */
+/*   Updated: 2023/11/15 10:08:41 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ int	ft_putstr_fd(const char *const s, int fd)
 {
 	int	done;
 
-	if (fd < 0)
-		return (-1);
 	if (!s)
 		return (write (fd, "(null)", 6));
 	done = 0;

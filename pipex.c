@@ -6,7 +6,7 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 10:16:03 by dabdygal          #+#    #+#             */
-/*   Updated: 2023/11/12 11:55:35 by dabdygal         ###   ########.fr       */
+/*   Updated: 2023/11/15 14:43:07 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,22 @@
 
 int	main(int argc, char *argv[])
 {
-	if (argc == 1 || parse_args(argc, argv) < 0)
+	pid_t	pid[2];
+	int		fd[2];
+
+	pid[1] = -1;
+	if (argc == 1 || !checkwarn(argc, argv))
 		return (EXIT_FAILURE);
+	if (pipe_warn(fd, argv[0]) < 0)
+		return (EXIT_FAILURE);
+	pid[0] = fork_warn_clean(fd, argv[0]);
+	if (pid[0] < 0)
+		return (EXIT_FAILURE);
+	else if (pid[0] > 0)
+	{
+		pid[1] = fork_warn_clean(fd, argv[0]);
+		if (pid[1] < 0)
+			return (EXIT_FAILURE);
+	}
 	return (EXIT_SUCCESS);
 }
