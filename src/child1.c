@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   child1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/11 12:09:38 by dabdygal          #+#    #+#             */
-/*   Updated: 2023/11/17 16:56:00 by dabdygal         ###   ########.fr       */
+/*   Created: 2023/11/17 16:56:25 by dabdygal          #+#    #+#             */
+/*   Updated: 2023/11/17 17:57:52 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
-# define PARSE_ERR_MSG "parse error\n"
+#include <unistd.h>
+#include <stdlib.h>
+#include <stdio.h>
 
-# include <unistd.h>
-
-int		checkwarn(int argc, char *argv[]);
-pid_t	fork_warn_clean(int fd[2], char *s);
-int		pipe_warn(int fd[2], char *s);
-int		parent(int fd[2], pid_t pid[2], char *s);
-
-#endif
+int	child1(int fd[2], char *argv[])
+{
+	if (close(fd[0]) < 0)
+		perror(argv[0]);
+	return (EXIT_FAILURE);
+}

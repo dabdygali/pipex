@@ -6,7 +6,7 @@
 #    By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/15 15:43:23 by dabdygal          #+#    #+#              #
-#    Updated: 2023/11/15 14:22:25 by dabdygal         ###   ########.fr        #
+#    Updated: 2023/11/17 17:54:24 by dabdygal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,10 @@ CFLAGS = -Wall -Wextra -Werror -fsanitize=address -I $(INCLUDE_DIR)
 
 SRC_FILES = checkwarn.c \
 			fork_warn_clean.c \
-			pipe_warn.c
+			pipe_warn.c \
+			parent.c \
+			child1.c \
+			child2.c
 
 MAIN_DIR = .
 
