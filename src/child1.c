@@ -6,7 +6,7 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 16:56:25 by dabdygal          #+#    #+#             */
-/*   Updated: 2023/11/19 13:08:26 by dabdygal         ###   ########.fr       */
+/*   Updated: 2023/11/19 13:32:53 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,11 @@ int	child1(int fd[2], char *argv[])
 		return (EXIT_FAILURE);
 	}
 	if (dup2(infile, STDIN_FILENO) < 0)
+	{
+		perror(argv[0]);
+		return (EXIT_FAILURE);
+	}
+	if (dup2(fd[1], STDOUT_FILENO) < 0)
 	{
 		perror(argv[0]);
 		return (EXIT_FAILURE);
