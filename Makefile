@@ -6,7 +6,7 @@
 #    By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/15 15:43:23 by dabdygal          #+#    #+#              #
-#    Updated: 2023/11/17 17:54:24 by dabdygal         ###   ########.fr        #
+#    Updated: 2023/11/20 17:31:03 by dabdygal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,9 @@ SRC_FILES = checkwarn.c \
 			pipe_warn.c \
 			parent.c \
 			child1.c \
-			child2.c
+			child2.c \
+			close_warn.c \
+			resolve_path.c
 
 MAIN_DIR = .
 

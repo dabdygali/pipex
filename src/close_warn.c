@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parent.c                                           :+:      :+:    :+:   */
+/*   close_warn.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/17 14:04:30 by dabdygal          #+#    #+#             */
-/*   Updated: 2023/11/20 10:57:07 by dabdygal         ###   ########.fr       */
+/*   Created: 2023/11/20 13:01:49 by dabdygal          #+#    #+#             */
+/*   Updated: 2023/11/20 14:18:07 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <unistd.h>
-#include <sys/wait.h>
 #include <stdio.h>
+#include <unistd.h>
 
-int	parent(int fd[2], pid_t pid[2], char *s)
+int	close_warn(int fd, char *s, int x)
 {
-	int	status;
-
-	status = EXIT_FAILURE;
-	if (waitpid(pid[0], NULL, WUNTRACED) < 0)
+	if (close(fd) < 0)
+	{
 		perror(s);
-	if (close(fd[1]) < 0)
-		perror(s);
-	if (waitpid(pid[1], &status, WUNTRACED) < 0)
-		perror(s);
-	if (close(fd[0]) < 0)
-		perror(s);
-	return (WEXITSTATUS(status));
+		if (x >= 0)
+		{
+			if (close(x) < 0)
+				perror(s);
+		}
+		return (-1);
+	}
+	return (0);
 }

@@ -6,20 +6,27 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 15:30:25 by dabdygal          #+#    #+#             */
-/*   Updated: 2023/07/17 10:14:40 by dabdygal         ###   ########.fr       */
+/*   Updated: 2023/11/20 17:28:12 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-void	ft_putendl_fd(const char *s, int fd)
+int	ft_putendl_fd(const char *s, int fd)
 {
+	int	done;
+
 	if (!s)
-		return ;
-	while (*s)
+		return (write(fd, "(null)", 6));
+	done = 0;
+	while (s[done])
 	{
-		write(fd, s, sizeof(char));
-		s++;
+		if (write(fd, s, sizeof(char)) < 0)
+			return (-1);
+		done++;
 	}
-	write(fd, "\n", sizeof(char));
+	if (write(fd, "\n", sizeof(char)) < 0)
+		return (-1);
+	done++;
+	return (done);
 }

@@ -6,7 +6,7 @@
 /*   By: dabdygal <dabdygal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 12:09:38 by dabdygal          #+#    #+#             */
-/*   Updated: 2023/11/19 13:56:12 by dabdygal         ###   ########.fr       */
+/*   Updated: 2023/11/20 17:31:21 by dabdygal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,8 @@ int		pipe_warn(int fd[2], char *s);
 int		parent(int fd[2], pid_t pid[2], char *s);
 int		child1(int fd[2], char *argv[]);
 int		child2(int fd[2], char *argv[]);
+int		close_warn(int fd, char *s, int x);
+int		dup2_clean(int infile, int new, char *argv[], int fd);
+int		resolve_path(char **path, char *s, char **env, char *name);
 
 #endif
