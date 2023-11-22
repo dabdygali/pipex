@@ -36,17 +36,17 @@ static int	open_clean2(int *outfile, char *argv[], int fd)
 static int	setup2(int fd[2], char *argv[], int *outfile)
 {
 	if (close_warn(fd[1], argv[0], -1) < 0)
-		return (EXIT_FAILURE);
+		return (-1);
 	if (open_clean2(outfile, argv, fd[0]) < 0)
-		return (EXIT_FAILURE);
+		return (-1);
 	if (dup2_clean(*outfile, STDOUT_FILENO, argv, fd[0]) < 0)
-		return (EXIT_FAILURE);
+		return (-1);
 	if (close_warn(*outfile, argv[0], fd[0]) < 0)
-		return (EXIT_FAILURE);
+		return (-1);
 	if (dup2_clean(fd[0], STDIN_FILENO, argv, fd[0]) < 0)
-		return (EXIT_FAILURE);
+		return (-1);
 	if (close_warn(fd[0], argv[0], -1) < 0)
-		return (EXIT_FAILURE);
+		return (-1);
 	return (0);
 }
 
