@@ -26,7 +26,7 @@ INCLUDE_DIR = include
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address -I $(INCLUDE_DIR)
+CFLAGS = -Wall -Wextra -Werror -I $(INCLUDE_DIR)
 
 SRC_FILES = checkwarn.c \
 			fork_warn_clean.c \

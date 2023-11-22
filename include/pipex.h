@@ -25,5 +25,6 @@ int		child2(int fd[2], char *argv[]);
 int		close_warn(int fd, char *s, int x);
 int		dup2_clean(int infile, int new, char *argv[], int fd);
 int		resolve_path(char **path, char *s, char **env, char *name);
+void	free_vector(char **vector);
 
 #endif

@@ -12,6 +12,35 @@
 
 #include "libft.h"
 #include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+
+static int	check_file_clean(char **path, char *substr, char *cmd, char *name)
+{
+	char	*tmp;
+
+	tmp = ft_strjoin(substr, "/");
+	if (!tmp)
+	{
+		perror(name);
+		free(substr);
+		return (-1);
+	}
+	*path = ft_strjoin(tmp, cmd);
+	free(tmp);
+	if (*path == NULL)
+	{
+		perror(name);
+		free(substr);
+		return (-1);
+	}
+	if (access(*path, F_OK) < 0)
+	{
+		free(*path);
+		return (0);
+	}
+	return (1);
+}
 
 static char	*build_path(char *head, char *cmd, char *name)
 {
@@ -30,9 +59,8 @@ static char	*build_path(char *head, char *cmd, char *name)
 			perror(name);
 			return (NULL);
 		}
-		if (check_existence)
-
-		
+		if (check_file_clean(&path, substr, cmd, name))
+			return (path);
 		free(substr);
 		if (head[i])
 			i++;

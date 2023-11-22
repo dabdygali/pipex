@@ -20,13 +20,13 @@ int	parent(int fd[2], pid_t pid[2], char *s)
 	int	status;
 
 	status = EXIT_FAILURE;
-	if (waitpid(pid[0], NULL, WUNTRACED) < 0)
-		perror(s);
 	if (close(fd[1]) < 0)
 		perror(s);
-	if (waitpid(pid[1], &status, WUNTRACED) < 0)
-		perror(s);
 	if (close(fd[0]) < 0)
+		perror(s);
+	if (waitpid(pid[0], NULL, WUNTRACED) < 0)
+		perror(s);
+	if (waitpid(pid[1], &status, WUNTRACED) < 0)
 		perror(s);
 	return (WEXITSTATUS(status));
 }

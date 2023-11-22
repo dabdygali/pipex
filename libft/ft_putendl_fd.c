@@ -21,7 +21,7 @@ int	ft_putendl_fd(const char *s, int fd)
 	done = 0;
 	while (s[done])
 	{
-		if (write(fd, s, sizeof(char)) < 0)
+		if (write(fd, &s[done], sizeof(char)) < 0)
 			return (-1);
 		done++;
 	}

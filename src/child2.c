@@ -15,6 +15,7 @@
 #include <stdio.h>
 #include <fcntl.h>
 #include "pipex.h"
+#include "libft.h"
 
 static int	open_clean2(int *outfile, char *argv[], int fd)
 {
@@ -32,31 +33,46 @@ static int	open_clean2(int *outfile, char *argv[], int fd)
 	return (0);
 }
 
-int	child2(int fd[2], char *argv[])
+static int	setup2(int fd[2], char *argv[], int *outfile)
 {
-	int			outfile;
-	extern char	**environ;
-	char		*vector[2];
-	char		*path;
-
 	if (close_warn(fd[1], argv[0], -1) < 0)
 		return (EXIT_FAILURE);
-	if (open_clean2(&outfile, argv, fd[0]) < 0)
+	if (open_clean2(outfile, argv, fd[0]) < 0)
 		return (EXIT_FAILURE);
-	if (dup2_clean(outfile, STDOUT_FILENO, argv, fd[0]) < 0)
+	if (dup2_clean(*outfile, STDOUT_FILENO, argv, fd[0]) < 0)
 		return (EXIT_FAILURE);
-	if (close_warn(outfile, argv[0], fd[0]) < 0)
+	if (close_warn(*outfile, argv[0], fd[0]) < 0)
 		return (EXIT_FAILURE);
 	if (dup2_clean(fd[0], STDIN_FILENO, argv, fd[0]) < 0)
 		return (EXIT_FAILURE);
 	if (close_warn(fd[0], argv[0], -1) < 0)
 		return (EXIT_FAILURE);
-	if (resolve_path(&path, argv[3], environ, argv[0]) < 0)
+	return (0);
+}
+
+int	child2(int fd[2], char *argv[])
+{
+	int			outfile;
+	extern char	**environ;
+	char		**vector;
+	char		*path;
+
+	if (setup2(fd, argv, &outfile) < 0)
 		return (EXIT_FAILURE);
-	vector[0] = argv[3];
-	vector[1] = NULL;
-	if (execve(argv[3], vector, environ) < 0)
+	vector = ft_split_wspace(argv[3]);
+	if (!vector)
+	{
 		perror(argv[0]);
+		return (EXIT_FAILURE);
+	}
+	if (resolve_path(&path, vector[0], environ, argv[0]) < 0)
+	{
+		free_vector(vector);
+		return (EXIT_FAILURE);
+	}
+	if (execve(path, vector, environ) < 0)
+		perror(argv[0]);
+	free_vector(vector);
 	free(path);
 	return (EXIT_FAILURE);
 }
